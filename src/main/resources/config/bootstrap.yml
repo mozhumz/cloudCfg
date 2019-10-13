@@ -1,0 +1,56 @@
+spring:
+  rabbitmq:
+    addresses: localhost
+    port: 5672
+    username: guest
+    password: guest
+  profiles:
+    #native表示使用本地配置文件 不用远程仓库
+#    active: native
+
+  application:
+    name: service-config
+  cloud:
+    config:
+      server:
+#        native:
+#          #申明本地配置文件的存放位置
+#          searchLocation: G:\idea_workspace\github\cloudCfg\springcloud-config
+#          searchLocation: classpath:config/
+        git:
+          #          uri: https://github.com/forezp/SpringcloudConfig/
+          uri: https://github.com/mozhumz/springcloud-config
+          #          配置Git仓库位置
+#          searchPaths: respo
+          #          spring_cloud_in_action/config-repo 配置仓库路径下的相对搜索位置，可以配置多个
+#          username:
+#          #          访问Git仓库的用户名 公有库不需要
+#          password:
+      #          访问Git仓库的用户名密码 公有库不需要
+      label: master
+
+
+
+
+server:
+  port: 8888
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:1111/eureka/
+
+management:
+  #SpringCloud 1.5版本暴露接口，暴露/bus-refresh接口
+#  security:
+#    enabled: false
+  #SpringCloud 2.0.0版本以后暴露接口方式
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+#是否开启基本的鉴权，默认为true
+security:
+  basic:
+    enabled: false
